@@ -1,0 +1,5 @@
+query-seminars
+
+insert-seminar {"day": "2023-05-23", "location": "Berlin", "topic": "JPA", "description": "JPA Basics"}
+
+update-seminar {"identity": 17, "day": "2023-05-22"}
