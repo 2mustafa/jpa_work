@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 
-@Table(name="Document", schema="cookbook")
+@Table(name = "Document", schema = "cookbook")
 public class Document extends BaseEntity {
 
 	@Id
@@ -27,14 +27,15 @@ public class Document extends BaseEntity {
 	@Column(nullable = false, updatable = true)
 	private byte content;
 
+
 	public Document () {
-		
+
 	}
+
 
 	public Document (String hash, byte content) {
 		this.hash = hash;
 		this.content = content;
-		
 	}
 
 
