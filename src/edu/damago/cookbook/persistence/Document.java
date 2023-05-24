@@ -4,13 +4,17 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 
+@Table(name="Document", schema="cookbook")
 public class Document extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@PrimaryKeyJoinColumn(name = "documentIdentity")
 	private long documentIdentity;
 
 	@Column(nullable = false, updatable = true)
@@ -23,9 +27,14 @@ public class Document extends BaseEntity {
 	@Column(nullable = false, updatable = true)
 	private byte content;
 
-
 	public Document () {
+		
+	}
 
+	public Document (String hash, byte content) {
+		this.hash = hash;
+		this.content = content;
+		
 	}
 
 
@@ -44,7 +53,7 @@ public class Document extends BaseEntity {
 	}
 
 
-	public void setHash (String hash) {
+	protected void setHash (String hash) {
 		this.hash = hash;
 	}
 
@@ -54,7 +63,7 @@ public class Document extends BaseEntity {
 	}
 
 
-	public void setType (String type) {
+	protected void setType (String type) {
 		this.type = type;
 	}
 
@@ -64,7 +73,7 @@ public class Document extends BaseEntity {
 	}
 
 
-	public void setContent (byte content) {
+	protected void setContent (byte content) {
 		this.content = content;
 	}
 
