@@ -25,7 +25,7 @@ public class Document extends BaseEntity {
 	private String type;
 
 	@Column(nullable = false, updatable = true)
-	private byte content;
+	private byte[] content;
 
 
 	public Document () {
@@ -33,7 +33,7 @@ public class Document extends BaseEntity {
 	}
 
 
-	public Document (String hash, byte content) {
+	public Document (String hash, byte[] content) {
 		this.hash = hash;
 		this.content = content;
 	}
@@ -69,12 +69,12 @@ public class Document extends BaseEntity {
 	}
 
 
-	public byte getContent () {
+	public byte[] getContent () {
 		return content;
 	}
 
 
-	protected void setContent (byte content) {
+	protected void setContent (byte[] content) {
 		this.content = content;
 	}
 
