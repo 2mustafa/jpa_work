@@ -4,7 +4,9 @@ CREATE TABLE IngredientType (
     !!!!primaryKey = foreignKey see line#__49
 	
 	avatarReference BIGINT NOT NULL,
-    !!!! = foreignKey see line#__
+	>>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean pescatarian;
 	>>>>private Document avatar;
 	
 	alias CHAR(128) NOT NULL,
