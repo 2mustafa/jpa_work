@@ -2,65 +2,51 @@ package edu.damago.cookbook.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.eclipse.persistence.annotations.CacheIndex;
+import edu.damago.tool.HashCodes;
 
 
-@Table(name = "Document", schema = "cookbook")
-@PrimaryKeyJoinColumn(name = "documentIdentity")
+@Entity
+@Table(schema = "cookbook", name = "Document")
+@PrimaryKeyJoinColumn(name="documentIdentity")
 @DiscriminatorValue("Document")
 public class Document extends BaseEntity {
+	static private final byte[] EMPTY_CONTENT = {};
+	static private final String EMPTY_HASH = HashCodes.sha2HashText(256, EMPTY_CONTENT);
 
-	/**
-	CREATE TABLE Document (
-    documentIdentity BIGINT NOT NULL,
-    hash CHAR(64) NOT NULL,
-    type VARCHAR(63) NOT NULL,
-    content LONGBLOB NOT NULL,
-    PRIMARY KEY (documentIdentity),
-    FOREIGN KEY (documentIdentity) REFERENCES BaseEntity (identity) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE KEY (hash)
-);
-	 */
-	
-	/**
-	@NotNull 
-	@Size(max=63) 
-	@Column(nullable = false //defined///,
-		updatable = false //readOnly//,
-		insertable = true, //SQL INSET befehl//
-		length = 63 //VARCHAR(63)//
-		)	
-	private String type;
-	**/
-	
-	@Column(nullable = false, updatable = true)
+	@NotNull @Size(max=63)
+	@Column(nullable = false, updatable = false, insertable = true, length = 63)
 	private String type;
 
-	@Column(nullable = false)
-	@Size(min = 64, max = 64)
+	@NotNull @Size(min=64, max=64)
+	@CacheIndex(updateable = false)
+	@Column(nullable = false, updatable = false, insertable = true, length = 64, unique = true)
 	private String hash;
 
-	@Column(nullable = false, updatable = true)
+	@NotNull @Size(max=0x10000000)	// max = 256MB
+	@Column(nullable = false, updatable = false, insertable = true)
 	private byte[] content;
 
 
-	public Document () {
-
+	protected Document () {
+		this(null, null);
 	}
 
 
-	public Document (String hash, String type, byte[] content) {
-		this.hash = hash;
-		this.type = type;
-		this.content = content;
+	public Document (final String type, final byte[] content) {
+		this.content = content == null ? EMPTY_CONTENT : content;
+		this.hash = this.content.length == 0 ? EMPTY_HASH : HashCodes.sha2HashText(256, this.content);
+		this.type = type == null ? "application/octet-stream" : type;
 	}
 
 
 	public String getHash () {
-		return hash;
+		return this.hash;
 	}
 
 
@@ -70,7 +56,7 @@ public class Document extends BaseEntity {
 
 
 	public String getType () {
-		return type;
+		return this.type;
 	}
 
 
@@ -80,12 +66,11 @@ public class Document extends BaseEntity {
 
 
 	public byte[] getContent () {
-		return content;
+		return this.content;
 	}
 
 
 	protected void setContent (byte[] content) {
 		this.content = content;
 	}
-
 }

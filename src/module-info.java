@@ -8,7 +8,7 @@ module edu.damago.jpa.work {
 
 	exports edu.damago.seminar.persistence;
 	opens edu.damago.seminar.persistence;
-	
+
 	exports edu.damago.cookbook.persistence;
 	opens edu.damago.cookbook.persistence;
 }

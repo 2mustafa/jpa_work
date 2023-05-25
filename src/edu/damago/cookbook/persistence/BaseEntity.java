@@ -19,7 +19,7 @@ import javax.validation.constraints.Positive;
  * root entity class allows for the unique generation of primary keys across all subclasses,
  * and additionally for both polymorphic relationships and polymorphic queries.
  */
-//@Entity
+@Entity
 @Table(schema = "cookbook", name = "BaseEntity", indexes = @Index(columnList = "discriminator"))
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="discriminator")

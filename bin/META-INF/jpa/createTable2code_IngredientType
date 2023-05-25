@@ -1,17 +1,17 @@
 CREATE TABLE IngredientType (
     
-	
 	ingredientTypeIdentity BIGINT NOT NULL,
-    !!!!primaryKey = foreignKey see line#__
+    !!!!primaryKey = foreignKey see line#__49
 	
 	avatarReference BIGINT NOT NULL,
-    !!!! = foreignKey see line#__
+	>>>>@NotNull
+	>>>>@JoinColumn(name = "avatarReference", nullable = false, updatable = false, insertable = true)
 	>>>>private Document avatar;
 	
 	alias CHAR(128) NOT NULL,
     >>>>@NotNull 
 	>>>>@Size(max=128)
-	>>>>@Column(nullable = false, updatable = false, insertable = true, length = 128)
+	>>>>@Column(nullable = false, updatable = false, insertable = true, length = 128, unique = true)
 	>>>>private String alias;
 	
 	pescatarian BOOLEAN NOT NULL,
@@ -34,7 +34,6 @@ CREATE TABLE IngredientType (
 	>>>>@Column(nullable = false, updatable = false, insertable = true)
 	>>>>private boolean vegan;
 	
-	
 	description VARCHAR(4094) NULL,
     >>>>@Size(max=4094)
 	>>>>@Column(nullable = true, updatable = true, insertable = true, length = 4094)
@@ -42,7 +41,6 @@ CREATE TABLE IngredientType (
 	
 	PRIMARY KEY (ingredientTypeIdentity),
 	>>>>@PrimaryKeyJoinColumn(name="ingredientTypeIdentity")
-    
 	
 	FOREIGN KEY (ingredientTypeIdentity) REFERENCES BaseEntity (identity) ON DELETE CASCADE ON UPDATE CASCADE,
     >>>>@Entity
@@ -54,12 +52,12 @@ CREATE TABLE IngredientType (
 	
 	FOREIGN KEY (avatarReference) REFERENCES Document (documentIdentity) ON DELETE RESTRICT ON UPDATE CASCADE,
 	!!!! foreignKey != primaryKey
-????>>>>@DiscriminatorValue("IngredientType")
-????!!!!set before class
+	????>>>>@DiscriminatorValue("avatarReference")
+	????!!!!set before class
 	
 	
 	UNIQUE KEY (alias)
-	>>>> = line#__ unique = true
+	>>>> = line#14 unique = true
 	!!!!set in varible 
 	
 	

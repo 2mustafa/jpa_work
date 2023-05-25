@@ -4,14 +4,14 @@ import java.io.IOException;
 
 
 /**
- * Facade for the seminar application.
+ * Facade for the document application.
  */
-public class SeminarApp {
+public class DocumentApp {
 
 	/**
 	 * Prevents external instantiation.
 	 */
-	private SeminarApp () {}
+	private DocumentApp () {}
 
 
 	/**
@@ -20,7 +20,7 @@ public class SeminarApp {
 	 * @throws IOException if there is an I/O related problem reading from the shell
 	 */
 	static public void main (final String[] args) throws IOException {
-		final SeminarController controller = new SeminarController();
+		final DocumentController controller = new DocumentController();
 		controller.rootView().display();
 	}
 }
