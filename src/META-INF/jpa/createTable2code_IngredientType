@@ -9,7 +9,8 @@ CREATE TABLE IngredientType (
 	>>>>private Document avatar;
 	
 	alias CHAR(128) NOT NULL,
-    >>>>@NotNull @Size(max=128)
+    >>>>@NotNull 
+	>>>>@Size(max=128)
 	>>>>@Column(nullable = false, updatable = false, insertable = true, length = 128)
 	>>>>private String alias;
 	
@@ -23,6 +24,7 @@ CREATE TABLE IngredientType (
     
 	
 	vegan BOOLEAN NOT NULL,
+	>>>>@N
     
 	
 	description VARCHAR(4094) NULL,
