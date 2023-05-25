@@ -1,8 +1,7 @@
 CREATE TABLE IngredientType (
     
-	
 	ingredientTypeIdentity BIGINT NOT NULL,
-    !!!!primaryKey = foreignKey see line#__
+    !!!!primaryKey = foreignKey see line#__49
 	
 	avatarReference BIGINT NOT NULL,
     !!!! = foreignKey see line#__
@@ -34,7 +33,6 @@ CREATE TABLE IngredientType (
 	>>>>@Column(nullable = false, updatable = false, insertable = true)
 	>>>>private boolean vegan;
 	
-    
 	
 	description VARCHAR(4094) NULL,
     >>>>@Size(max=4094)
@@ -55,14 +53,13 @@ CREATE TABLE IngredientType (
 	
 	FOREIGN KEY (avatarReference) REFERENCES Document (documentIdentity) ON DELETE RESTRICT ON UPDATE CASCADE,
 	!!!! foreignKey != primaryKey
-    >>>>@Entity
-	>>>>@Table(schema = "cookbook", name = "IngredientType")
->>>>@PrimaryKeyJoinColumn(name="documentIdentity")
-	>>>>@DiscriminatorValue("IngredientType")
-	!!!!set before class
+????>>>>@DiscriminatorValue("IngredientType")
+????!!!!set before class
 	
 	
 	UNIQUE KEY (alias)
+	>>>> = line#__ unique = true
+	!!!!set in varible 
 	
 	
 );

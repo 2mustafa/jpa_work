@@ -9,24 +9,36 @@ CREATE TABLE IngredientType (
 	>>>>private Document avatar;
 	
 	alias CHAR(128) NOT NULL,
-    >>>>@NotNull @Size(max=128)
+    >>>>@NotNull 
+	>>>>@Size(max=128)
 	>>>>@Column(nullable = false, updatable = false, insertable = true, length = 128)
 	>>>>private String alias;
 	
 	pescatarian BOOLEAN NOT NULL,
-    
+    >>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean pescatarian;
 	
 	lactoOvoVegetarian BOOLEAN NOT NULL,
-    
+    >>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean lactoOvoVegetarian;
 	
 	lactoVegetarian BOOLEAN NOT NULL,
-    
+    >>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean lactoVegetarian;
 	
 	vegan BOOLEAN NOT NULL,
-    
+	>>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean vegan;
+	
 	
 	description VARCHAR(4094) NULL,
-    
+    >>>>@Size(max=4094)
+	>>>>@Column(nullable = true, updatable = true, insertable = true, length = 4094)
+	>>>>private String description;
 	
 	PRIMARY KEY (ingredientTypeIdentity),
 	>>>>@PrimaryKeyJoinColumn(name="ingredientTypeIdentity")
@@ -42,14 +54,13 @@ CREATE TABLE IngredientType (
 	
 	FOREIGN KEY (avatarReference) REFERENCES Document (documentIdentity) ON DELETE RESTRICT ON UPDATE CASCADE,
 	!!!! foreignKey != primaryKey
-    >>>>@Entity
-	>>>>@Table(schema = "cookbook", name = "IngredientType")
->>>>@PrimaryKeyJoinColumn(name="documentIdentity")
-	>>>>@DiscriminatorValue("IngredientType")
-	!!!!set before class
+????>>>>@DiscriminatorValue("IngredientType")
+????!!!!set before class
 	
 	
 	UNIQUE KEY (alias)
+	>>>> = line#__ unique = true
+	!!!!set in varible 
 	
 	
 );
