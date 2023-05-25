@@ -53,15 +53,15 @@ public class IngredientType extends BaseEntity {
 		
 	}
 	
-	public IngredientType (Document avatar, String alias, String description, boolean pescatarian, boolean lactoOvoVegetarian, boolean lactoVegetarian, boolean vegan) {
-		this.avatar = avatar;
-		this.alias = alias;
-		this.description = description;
-		this.pescatarian = pescatarian;
-		this.lactoOvoVegetarian = lactoOvoVegetarian;
-		this.lactoVegetarian = lactoVegetarian;
-		this.vegan = vegan;
-	}
+//	public IngredientType (Document avatar, String alias, String description, boolean pescatarian, boolean lactoOvoVegetarian, boolean lactoVegetarian, boolean vegan) {
+//		this.avatar = avatar;
+//		this.alias = alias;
+//		this.description = description;
+//		this.pescatarian = pescatarian;
+//		this.lactoOvoVegetarian = lactoOvoVegetarian;
+//		this.lactoVegetarian = lactoVegetarian;
+//		this.vegan = vegan;
+//	}
 
 
 	public Document getAvatar () {
@@ -101,7 +101,7 @@ public class IngredientType extends BaseEntity {
 			this.vegan = false;
 			System.out.println("isPescatarian " + isVegan());
 			
-			System.out.println("setPescatarian set false");
+			System.out.println("setPescatarian done...");
 		}else if (parameterization == false) {
 			this.pescatarian = false;
 			System.out.println("isPescatarian " + isPescatarian());
@@ -135,7 +135,7 @@ public class IngredientType extends BaseEntity {
 			this.vegan = false;
 			System.out.println("isPescatarian " + isVegan());
 			
-			System.out.println("setLactoOvoVegetarian set false");
+			System.out.println("setLactoOvoVegetarian done...");
 		}else if (parameterization == false) {
 			this.pescatarian = false;
 			System.out.println("isPescatarian " + isPescatarian());
@@ -146,7 +146,7 @@ public class IngredientType extends BaseEntity {
 			this.vegan = true;
 			System.out.println("isPescatarian " + isVegan());
 			
-			System.out.println("setPescatarian done...");
+			System.out.println("setLactoOvoVegetarian done...");
 		}
 	}
 
