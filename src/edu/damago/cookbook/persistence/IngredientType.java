@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -14,10 +15,11 @@ import javax.validation.constraints.Size;
 @Table(schema = "cookbook", name = "IngredientType")
 @PrimaryKeyJoinColumn(name = "ingredientTypeIdentity")
 @DiscriminatorValue("IngredientType")
-public class IngredientType extends Document {
+public class IngredientType extends BaseEntity {
 
 	@NotNull
-	@JoinColumn(name = "avatarReference", nullable = false, updatable = false, insertable = true)
+	//@ManyToOne
+	@JoinColumn(name = "avatarReference", nullable = false, updatable = true, insertable = true)
 	private Document avatar;
 
 	@NotNull
@@ -47,12 +49,10 @@ public class IngredientType extends Document {
 	private String description;
 
 
-
-
-	public IngredientType () {
-		this(null, null, null, null, null, null, null);
+	public IngredientType() {
+		
 	}
-
+	
 	public IngredientType (Document avatar, String alias, String description, boolean pescatarian, boolean lactoOvoVegetarian, boolean lactoVegetarian, boolean vegan) {
 		this.avatar = avatar;
 		this.alias = alias;
@@ -63,18 +63,14 @@ public class IngredientType extends Document {
 		this.vegan = vegan;
 	}
 
-	public IngredientType (Object avatar2, Object alias2, Object description2, Object object, Object object2, Object object3, Object object4) {
-		// TODO Auto-generated constructor stub
-	}
-
 
 	public Document getAvatar () {
 		return avatar;
 	}
 
 
-	public void setAvatar (Document avatar) {
-		this.avatar = avatar;
+	public void setAvatar (Document parameterization) {
+		this.avatar = parameterization;
 	}
 
 
@@ -83,8 +79,8 @@ public class IngredientType extends Document {
 	}
 
 
-	public void setAlias (String alias) {
-		this.alias = alias;
+	public void setAlias (String parameterization) {
+		this.alias = parameterization;
 	}
 
 
@@ -93,8 +89,32 @@ public class IngredientType extends Document {
 	}
 
 
-	public void setPescatarian (boolean pescatarian) {
-		this.pescatarian = pescatarian;
+	public void setPescatarian (boolean parameterization) {
+		System.out.println("starting setPescatarian " + parameterization);
+		if (parameterization == true) {
+			this.pescatarian = true;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = false;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = false;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = false;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setPescatarian set false");
+		}else if (parameterization == false) {
+			this.pescatarian = false;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = false;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = false;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = false;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setPescatarian done...");
+		}
+
 	}
 
 
@@ -103,8 +123,31 @@ public class IngredientType extends Document {
 	}
 
 
-	public void setLactoOvoVegetarian (boolean lactoOvoVegetarian) {
-		this.lactoOvoVegetarian = lactoOvoVegetarian;
+	public void setLactoOvoVegetarian (boolean parameterization) {
+		System.out.println("starting setLactoOvoVegetarian " + parameterization);
+		if (parameterization == true) {
+			this.pescatarian = true;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = true;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = false;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = false;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setLactoOvoVegetarian set false");
+		}else if (parameterization == false) {
+			this.pescatarian = false;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = false;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = true;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = true;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setPescatarian done...");
+		}
 	}
 
 
@@ -113,8 +156,31 @@ public class IngredientType extends Document {
 	}
 
 
-	public void setLactoVegetarian (boolean lactoVegetarian) {
-		this.lactoVegetarian = lactoVegetarian;
+	public void setLactoVegetarian (boolean parameterization) {
+		System.out.println("starting setLactoVegetarian " + parameterization);
+		if (parameterization == true) {
+			this.pescatarian = true;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = true;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = true;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = false;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setLactoVegetarian done...");
+		}else if (parameterization == false) {
+			this.pescatarian = false;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = false;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = false;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = false;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setLactoVegetarian done...");
+		}
 	}
 
 
@@ -123,9 +189,31 @@ public class IngredientType extends Document {
 	}
 
 
-	public void setVegan (boolean vegan) {
-		System.out.println(" iamsetting....iamsetting....iamsetting...." + vegan);
-		this.vegan = vegan;
+	public void setVegan (boolean parameterization) {
+		System.out.println("starting setVegan " + parameterization);
+		if (parameterization == true) {
+			this.pescatarian = true;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = true;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = true;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = true;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setVegan done...");
+		}else if (parameterization == false) {
+			this.pescatarian = false;
+			System.out.println("isPescatarian " + isPescatarian());
+			this.lactoOvoVegetarian = false;
+			System.out.println("isLactoOvoVegetarian " + isLactoOvoVegetarian());
+			this.lactoVegetarian = false;
+			System.out.println("isLactoVegetarian " + isLactoVegetarian());
+			this.vegan = false;
+			System.out.println("isPescatarian " + isVegan());
+			
+			System.out.println("setVegan done...");
+		}
 	}
 
 
@@ -137,7 +225,5 @@ public class IngredientType extends Document {
 	public void setDescription (String description) {
 		this.description = description;
 	}
-	
-	
 
 }

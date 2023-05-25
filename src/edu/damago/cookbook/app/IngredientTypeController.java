@@ -28,7 +28,7 @@ public class IngredientTypeController {
 	public IngredientTypeController () {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("mysql-local");
 		this.rootView = new CommandShell();
-		// this.rootView.setExceptionHandler(e -> e.printStackTrace());
+		this.rootView.setExceptionHandler(e -> e.printStackTrace());
 
 		// register event listeners
 		this.rootView.addEventListener("quit", parameterization -> this.performQuitCommand(parameterization));
@@ -38,22 +38,10 @@ public class IngredientTypeController {
 		this.rootView.addEventListener("insert-ingredient-type", parameterization -> this.performInsertIngredientTypeCommand(parameterization));
 		this.rootView.addEventListener("update-ingredient-type", parameterization -> this.performUpdateIngredientTypeCommand(parameterization));
 		this.rootView.addEventListener("delete-ingredient-type", parameterization -> this.performDeleteIngredientTypeCommand(parameterization));
-		this.rootView.addEventListener("setPescatarian", parameterization -> this.setPescatarian(parameterization));
-	}
-
-
-	public void setPescatarian (final String parameterization) throws NullPointerException {
-		System.out.println("------------dooooing: " + parameterization);
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		final IngredientType type = entityManager.find(IngredientType.class, parameterization);
-		if (parameterization.equals("true")) {
-			type.setVegan(true);
-		}else if (parameterization.equals("false")) {
-			type.setVegan(true);
-		}else {
-			System.err.println("true or false pls");
-		}
 		
+		this.rootView.addEventListener("1", parameterization -> this.performQueryIngredientTypesCommand(parameterization));
+		this.rootView.addEventListener("2", parameterization -> this.performUpdateIngredientTypeCommand(parameterization));
+
 	}
 
 
@@ -90,7 +78,6 @@ public class IngredientTypeController {
 		System.out.println("- insert-ingredient-type <JSON>: inserts a new ingredient type");
 		System.out.println("- update-ingredient-type <JSON>: updates an existing ingredient type");
 		System.out.println("- delete-ingredient-type <ID>: removes an existing ingredient type");
-		System.out.println("setPescatarian true/false");
 	}
 
 
