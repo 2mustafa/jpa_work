@@ -1,0 +1,42 @@
+CREATE TABLE Document (
+
+    documentIdentity BIGINT NOT NULL,
+	!!!!primaryKey = foreignKey see line#29
+		
+    hash CHAR(64) NOT NULL,
+	>>>>@NotNull @Size(min=64, max=64)
+	>>>>@CacheIndex(updateable = false)
+	>>>>@Column(nullable = false, updatable = false, insertable = true, length = 64, unique = true)
+	>>>>private String hash;
+	
+    type VARCHAR(63) NOT NULL,
+    >>>>@NotNull @Size(max=63)
+	>>>>@Column(nullable = false, updatable = false, insertable = true, length = 63)
+	>>>>private String type;
+	
+	content LONGBLOB NOT NULL,
+	>>>>@NotNull @Size(max=0x10000000)	// max = 256MB
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private byte[] content;
+	
+	PRIMARY KEY (documentIdentity),
+    >>>>@PrimaryKeyJoinColumn(name="documentIdentity")
+	
+	FOREIGN KEY (documentIdentity) REFERENCES BaseEntity (identity) ON DELETE CASCADE ON UPDATE 
+	CASCADE,
+	>>>>@Entity
+	>>>>@Table(schema = "cookbook", name = "Document")
+	>>>>@PrimaryKeyJoinColumn(name="documentIdentity")
+	>>>>@DiscriminatorValue("Document")
+	!!!!set before class
+	!!!!primaryKey = foreignKey
+
+    
+	UNIQUE KEY (hash)
+	>>>> = line#9 unique = true
+	!!!!set in varible 
+);
+
+
+>>>> "written in code"
+!!!! "important "
