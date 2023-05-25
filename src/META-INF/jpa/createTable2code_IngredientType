@@ -15,20 +15,22 @@ CREATE TABLE IngredientType (
 	>>>>private String alias;
 	
 	pescatarian BOOLEAN NOT NULL,
-    
+     >>>>@NotNull
 	
 	lactoOvoVegetarian BOOLEAN NOT NULL,
-    
+     >>>>@NotNull
 	
 	lactoVegetarian BOOLEAN NOT NULL,
-    
+     >>>>@NotNull
 	
 	vegan BOOLEAN NOT NULL,
-	>>>>@N
+	 >>>>@NotNull
     
 	
 	description VARCHAR(4094) NULL,
-    
+    >>>>@Size(max=4094)
+	>>>>@Column(nullable = true, updatable = true, insertable = true, length = 4094)
+	>>>>private String description;
 	
 	PRIMARY KEY (ingredientTypeIdentity),
 	>>>>@PrimaryKeyJoinColumn(name="ingredientTypeIdentity")
