@@ -15,16 +15,25 @@ CREATE TABLE IngredientType (
 	>>>>private String alias;
 	
 	pescatarian BOOLEAN NOT NULL,
-     >>>>@NotNull
+    >>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean pescatarian;
 	
 	lactoOvoVegetarian BOOLEAN NOT NULL,
-     >>>>@NotNull
+    >>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean lactoOvoVegetarian;
 	
 	lactoVegetarian BOOLEAN NOT NULL,
-     >>>>@NotNull
+    >>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean lactoVegetarian;
 	
 	vegan BOOLEAN NOT NULL,
-	 >>>>@NotNull
+	>>>>@NotNull
+	>>>>@Column(nullable = false, updatable = false, insertable = true)
+	>>>>private boolean vegan;
+	
     
 	
 	description VARCHAR(4094) NULL,
