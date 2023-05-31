@@ -3,6 +3,8 @@ package edu.damago.cookbook.persistence;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -24,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.eclipse.persistence.annotations.CacheIndex;
 import edu.damago.tool.HashCodes;
+import edu.damago.cookbook.persistence.BaseEntity;
 
 
 @Entity
@@ -42,38 +45,37 @@ public class Person extends BaseEntity {
 
 	//avatarReference BIGINT NOT NULL,
 	//FOREIGN KEY (avatarReference) REFERENCES Document (documentIdentity) ON DELETE RESTRICT ON UPDATE CASCADE, //update == primärschlüssel
-	@ManyToOne(optional = false, cascade = {})
-	@JoinColumn(name = "avatarReference", nullable = false, updatable = true, insertable = true)
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "avatarReference", nullable = false, updatable = true)
 	private Document avatar;
 
 	//email CHAR(128) NOT NULL,
 	//UNIQUE KEY (email)
-	
-	//no
-	
-	
 	@NotNull
 	@Email
 	@Size(max = 128)
-	@Column(name = "email", nullable = false, updatable = true, insertable = true, unique = true, length = 128)
+	@CacheIndex(updateable = false)
+	@Column(name = "email", nullable = false, updatable = true, unique = true, length = 128)
 	private String email;
 
 	//passwordHash CHAR(64) NOT NULL,
 	@NotNull
 	@Size(max = 64)
-	@CacheIndex(updateable = false)
-	@Column(name = "passwordHash", nullable = false, updatable = true, insertable = true, length = 64)
+	@Column(name = "passwordHash", nullable = false, updatable = true, length = 64)
 	private String passwordHash;
 
 	//groupAlias ENUM("USER", "ADMIN") NOT NULL,
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(name = "groupAlias", nullable = false, updatable = true, insertable = true)
+	@Column(name = "groupAlias", nullable = false, updatable = true)
 	private Group group;
 
+	@NotNull @Valid
 	@Embedded
-	@NotNull
-	@Valid
+	@AttributeOverrides({
+		@AttributeOverride(name = "family", column = @Column(name = "surname")),
+		@AttributeOverride(name = "given", column = @Column(name = "forename"))
+	})
 	private Name name;
 
 	@Embedded
@@ -90,12 +92,12 @@ public class Person extends BaseEntity {
 		uniqueConstraints = @UniqueConstraint(columnNames = { "personReference", "phone" })
 	)
 	@Column(name = "phone", nullable = false, updatable = false, insertable = true, length = 16)
-	private HashSet<String> phones;
+	protected HashSet<String> phones;
 
 	@NotNull
-	@Column(name = "recipes", nullable = false, updatable = false, length = 16)
+	//@Column(name = "recipes", nullable = false, updatable = false, length = 16)
 	@OneToMany(mappedBy = "owner", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE })
-	private Set<Ingredient> ingredient;
+	private Set<Recipe> recipes;
 
 
 	public Person () {
@@ -104,7 +106,7 @@ public class Person extends BaseEntity {
 		this.name = new Name();
 		this.address = new Address();
 		this.phones = new HashSet<>();
-		this.ingredient = Collections.emptySet();
+		this.recipes = Collections.emptySet();
 
 	}
 
@@ -179,13 +181,13 @@ public class Person extends BaseEntity {
 	}
 
 
-	public Set<Ingredient> getRecipes () {
-		return ingredient;
+	public Set<Recipe> getRecipes () {
+		return recipes;
 	}
 
 
-	public void setIngredient (Set<Ingredient> ingredient) {
-		this.ingredient = ingredient;
+	public void setIngredient (Set<Recipe> recipes) {
+		this.recipes = recipes;
 	}
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import edu.damago.cookbook.persistence.Document;
 import edu.damago.cookbook.persistence.Person;
 import edu.damago.tool.CommandShell;
 import edu.damago.tool.JSON;
@@ -32,7 +33,6 @@ public class PersonController {
 		this.rootView.addEventListener("exit", parameterization -> this.performQuitCommand(parameterization));
 		this.rootView.addEventListener("help", parameterization -> this.performHelpCommand(parameterization));
 		this.rootView.addEventListener("query-people", parameterization -> this.performQueryPeopleCommand(parameterization));
-		this.rootView.addEventListener("1", parameterization -> this.performQueryPeopleCommand(parameterization));
 		this.rootView.addEventListener("insert-person", parameterization -> this.performInsertPersonCommand(parameterization));
 		this.rootView.addEventListener("update-person", parameterization -> this.performUpdatePersonCommand(parameterization));
 		this.rootView.addEventListener("delete-person", parameterization -> this.performDeletePersonCommand(parameterization));
@@ -118,7 +118,11 @@ public class PersonController {
 		try {
 			entityManager.getTransaction().begin();
 
+			final Document defaulAvatar = entityManager.find(Document.class, 1L);
+			if (defaulAvatar == null) throw new IllegalStateException();
+
 			final Person person = new Person();
+			person.setAvatar(defaulAvatar);
 			if (parameters.containsKey("email")) person.setEmail((String) parameters.get("email"));
 			if (parameters.containsKey("passwordHash")) person.setPasswordHash((String) parameters.get("passwordHash"));
 			if (parameters.containsKey("group")) person.setGroup(Person.Group.valueOf((String) parameters.get("group")));

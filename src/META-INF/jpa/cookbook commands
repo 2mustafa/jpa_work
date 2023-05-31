@@ -1,0 +1,23 @@
+query-seminars
+insert-seminar {"day": "2023-05-23", "location": "Berlin", "topic": "JPA", "description": "JPA Basics"}
+update-seminar {"identity": 17, "day": "2023-05-22"}
+delete-seminar 17
+
+query-documents
+insert-document D:\test.txt
+delete-document 42
+
+query-ingredient-types
+insert-ingredient-type {"alias": "Test", "pescatarian": true, "lactoOvoVegetarian": true, "lactoVegetarian": false, "vegan": false, "description": "Test-Test"}
+update-ingredient-type {"identity": 51, "pescatarian": false}
+delete-ingredient-type 51
+
+query-ingredients
+insert-ingredient {"amount": 1, "unit": "CAN"}
+update-ingredient {"identity": 52, "amount": 2.5, "unit": "TEASPOON"}
+delete-ingredient 52
+
+
+Kommando zum Testen eines INSERT für Person:
+
+query-peopleinsert-person {"email": "sascha.baumeister@gmail.com", "group": "ADMIN", "name": {"family": "Baumeister", "given": "Sascha"}, "address": {"street": "Torstraße 1", "city": "Berlin", "country": "Berlin", "postcode": "10500"}}
