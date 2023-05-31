@@ -49,19 +49,19 @@ public class IngredientType extends BaseEntity {
 	private String description;
 
 
-	public IngredientType() {
-		
+	public IngredientType () {
+
 	}
-	
-//	public IngredientType (Document avatar, String alias, String description, boolean pescatarian, boolean lactoOvoVegetarian, boolean lactoVegetarian, boolean vegan) {
-//		this.avatar = avatar;
-//		this.alias = alias;
-//		this.description = description;
-//		this.pescatarian = pescatarian;
-//		this.lactoOvoVegetarian = lactoOvoVegetarian;
-//		this.lactoVegetarian = lactoVegetarian;
-//		this.vegan = vegan;
-//	}
+
+	//	public IngredientType (Document avatar, String alias, String description, boolean pescatarian, boolean lactoOvoVegetarian, boolean lactoVegetarian, boolean vegan) {
+	//		this.avatar = avatar;
+	//		this.alias = alias;
+	//		this.description = description;
+	//		this.pescatarian = pescatarian;
+	//		this.lactoOvoVegetarian = lactoOvoVegetarian;
+	//		this.lactoVegetarian = lactoVegetarian;
+	//		this.vegan = vegan;
+	//	}
 
 
 	public Document getAvatar () {
@@ -99,10 +99,10 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = false;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = false;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setPescatarian done...");
-		}else if (parameterization == false) {
+		} else if (parameterization == false) {
 			this.pescatarian = false;
 			System.out.println("isPescatarian " + isPescatarian());
 			this.lactoOvoVegetarian = false;
@@ -110,8 +110,8 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = false;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = false;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setPescatarian done...");
 		}
 
@@ -133,10 +133,10 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = false;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = false;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setLactoOvoVegetarian done...");
-		}else if (parameterization == false) {
+		} else if (parameterization == false) {
 			this.pescatarian = false;
 			System.out.println("isPescatarian " + isPescatarian());
 			this.lactoOvoVegetarian = false;
@@ -144,8 +144,8 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = true;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = true;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setLactoOvoVegetarian done...");
 		}
 	}
@@ -166,10 +166,10 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = true;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = false;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setLactoVegetarian done...");
-		}else if (parameterization == false) {
+		} else if (parameterization == false) {
 			this.pescatarian = false;
 			System.out.println("isPescatarian " + isPescatarian());
 			this.lactoOvoVegetarian = false;
@@ -177,8 +177,8 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = false;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = false;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setLactoVegetarian done...");
 		}
 	}
@@ -199,10 +199,10 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = true;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = true;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setVegan done...");
-		}else if (parameterization == false) {
+		} else if (parameterization == false) {
 			this.pescatarian = false;
 			System.out.println("isPescatarian " + isPescatarian());
 			this.lactoOvoVegetarian = false;
@@ -210,8 +210,8 @@ public class IngredientType extends BaseEntity {
 			this.lactoVegetarian = false;
 			System.out.println("isLactoVegetarian " + isLactoVegetarian());
 			this.vegan = false;
-			System.out.println("isPescatarian " + isVegan());
-			
+			System.out.println("isVegan " + isVegan());
+
 			System.out.println("setVegan done...");
 		}
 	}

@@ -13,22 +13,25 @@ import edu.damago.tool.HashCodes;
 
 @Entity
 @Table(schema = "cookbook", name = "Document")
-@PrimaryKeyJoinColumn(name="documentIdentity")
+@PrimaryKeyJoinColumn(name = "documentIdentity")
 @DiscriminatorValue("Document")
 public class Document extends BaseEntity {
 	static private final byte[] EMPTY_CONTENT = {};
 	static private final String EMPTY_HASH = HashCodes.sha2HashText(256, EMPTY_CONTENT);
 
-	@NotNull @Size(max=63)
+	@NotNull
+	@Size(max = 63)
 	@Column(nullable = false, updatable = false, insertable = true, length = 63)
 	private String type;
 
-	@NotNull @Size(min=64, max=64)
+	@NotNull
+	@Size(min = 64, max = 64)
 	@CacheIndex(updateable = false)
 	@Column(nullable = false, updatable = false, insertable = true, length = 64, unique = true)
 	private String hash;
 
-	@NotNull @Size(max=0x10000000)	// max = 256MB
+	@NotNull
+	@Size(max = 0x10000000)	// max = 256MB
 	@Column(nullable = false, updatable = false, insertable = true)
 	private byte[] content;
 

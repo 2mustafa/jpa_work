@@ -35,11 +35,11 @@ CREATE TABLE Person (
 	groupAlias ENUM("USER", "ADMIN") NOT NULL,
 	title VARCHAR(15) NULL,
 	surname VARCHAR(31) NOT NULL,
-	forename VARCHAR(31) NULL,
-	postcode VARCHAR(15) NULL,
-	street VARCHAR(63) NULL,
-	city VARCHAR(63) NULL,
-	country VARCHAR(63) NULL,
+	forename VARCHAR(31) NOT NULL,
+	postcode VARCHAR(15) NOT NULL,
+	street VARCHAR(63) NOT NULL,
+	city VARCHAR(63) NOT NULL,
+	country VARCHAR(63) NOT NULL,
 	PRIMARY KEY (personIdentity),
 	FOREIGN KEY (personIdentity) REFERENCES BaseEntity (identity) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (avatarReference) REFERENCES Document (documentIdentity) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -79,12 +79,12 @@ CREATE TABLE IngredientType (
 CREATE TABLE Ingredient (
 	ingredientIdentity BIGINT NOT NULL,
 	recipeReference BIGINT NOT NULL,
-	ingredientTypeReference BIGINT NOT NULL,
+	typeReference BIGINT NOT NULL,
 	amount FLOAT NOT NULL,
 	unit ENUM ("LITRE", "GRAM", "TEASPOON", "TABLESPOON", "PINCH", "CUP", "CAN", "TUBE", "BUSHEL", "PIECE") NOT NULL,
 	PRIMARY KEY (ingredientIdentity),
 	FOREIGN KEY (ingredientIdentity) REFERENCES BaseEntity (identity) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (ingredientTypeReference) REFERENCES IngredientType (ingredientTypeIdentity) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (typeReference) REFERENCES IngredientType (ingredientTypeIdentity) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (recipeReference) REFERENCES Recipe (recipeIdentity) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
