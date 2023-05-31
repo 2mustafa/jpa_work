@@ -49,7 +49,7 @@ CREATE TABLE Person (
 CREATE TABLE Recipe (
 	recipeIdentity BIGINT NOT NULL,
 	avatarReference BIGINT NOT NULL,
-	ownerReference BIGINT NOT NULL,
+	ownerReference BIGINT NULL,
 	category ENUM ("MAIN_COURSE", "APPETIZER", "SNACK", "DESSERT", "BREAKFAST", "BUFFET", "BARBEQUE", "ADOLESCENT", "INFANT") NOT NULL,
 	title CHAR(128) NOT NULL,
 	description VARCHAR(4094) NULL,
@@ -57,7 +57,7 @@ CREATE TABLE Recipe (
 	PRIMARY KEY (recipeIdentity),
 	FOREIGN KEY (recipeIdentity) REFERENCES BaseEntity (identity) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (avatarReference) REFERENCES Document (documentIdentity) ON DELETE RESTRICT ON UPDATE CASCADE,
-	FOREIGN KEY (ownerReference) REFERENCES Person (personIdentity) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (ownerReference) REFERENCES Person (personIdentity) ON DELETE SET NULL ON UPDATE CASCADE,
 	UNIQUE KEY (title)
 );
 

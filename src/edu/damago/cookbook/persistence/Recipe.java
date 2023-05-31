@@ -35,12 +35,11 @@ public class Recipe extends BaseEntity {
 	@JoinColumn(name = "avatarReference", nullable = false, updatable = true)
 	private Document avatar;
 
-	//ownerReference BIGINT NOT NULL,
+	//ownerReference BIGINT NULL,
 	//FOREIGN KEY (ownerReference) REFERENCES Person (personIdentity) ON DELETE CASCADE ON UPDATE CASCADE,
-	@NotNull
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "ownerReference", nullable = false, updatable = true)
-	private Person onwer;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "ownerReference", nullable = true, updatable = true)
+	private Person owner;
 
 	@NotNull
 	@ManyToMany
@@ -105,14 +104,14 @@ public class Recipe extends BaseEntity {
 
 
 
-	public Person getOnwer () {
-		return onwer;
+	public Person getOwner () {
+		return owner;
 	}
 
 
 
-	public void setOnwer (Person onwer) {
-		this.onwer = onwer;
+	public void setOwner (Person owner) {
+		this.owner = owner;
 	}
 
 

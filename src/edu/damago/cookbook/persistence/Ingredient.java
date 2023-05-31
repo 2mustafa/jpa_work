@@ -1,38 +1,133 @@
 package edu.damago.cookbook.persistence;
 
-public class Ingredient {
-	IngredientType ingredientType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import edu.damago.tool.Copyright;
 
-	
 
-	public String getDescription () {
-		return this.ingredientType == null ? null : this.getDescription();
+/**
+ * Instances of this class model ingredient entities.
+ */
+@Entity
+@Table(schema = "cookbook", name = "Ingredient")
+@PrimaryKeyJoinColumn(name = "ingredientIdentity")
+@DiscriminatorValue("Ingredient")
+@Copyright(year = 2022, holders = "Sascha Baumeister")
+public class Ingredient extends BaseEntity {
+	static public enum Unit { LITRE, GRAM, TEASPOON, TABLESPOON, PINCH, CUP, CAN, TUBE, BUSHEL, PIECE }
+
+
+	@Positive
+	@Column(nullable = false, updatable = true)
+	private float amount;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, updatable = true)
+	private Unit unit;
+
+	// avoid @NotNull with @ManyToOne!
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "recipeReference", nullable = false, updatable = false, insertable = true)
+	private Recipe recipe;
+
+	// avoid @NotNull with @ManyToOne!
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "typeReference", nullable = false, updatable = false, insertable = true)
+	private IngredientType type;
+
+
+	protected Ingredient () {
+		this(null, null);
+	}
+
+
+	public Ingredient (final Recipe recipe, final IngredientType type) {
+		this.recipe = recipe;
+		this.type = type;
+	}
+
+
+	public float getAmount () {
+		return this.amount;
+	}
+
+
+	public void setAmount (final float amount) {
+		this.amount = amount;
+	}
+
+
+	public Unit getUnit () {
+		return this.unit;
+	}
+
+
+	public void setUnit (final Unit unit) {
+		this.unit = unit;
 	}
 
 
 	public String getAlias () {
-		return this.ingredientType.getAlias();
+		return this.type == null ? null : this.type.getAlias();
+	}
+
+
+	public String getDescription () {
+		return this.type == null ? null : this.type.getDescription();
 	}
 
 
 	public boolean isPescatarian () {
-		return ingredientType.isPescatarian();
+		return this.type == null ? false : this.type.isPescatarian();
 	}
 
 
 	public boolean isLactoOvoVegetarian () {
-
-		return this.ingredientType == null ? null : this.isLactoOvoVegetarian();
+		return this.type == null ? false : this.type.isLactoOvoVegetarian();
 	}
 
 
 	public boolean isLactoVegetarian () {
-		return ingredientType.isLactoVegetarian();
+		return this.type == null ? false : this.type.isLactoVegetarian();
 	}
 
 
 	public boolean isVegan () {
-		return ingredientType.isVegan();
+		return this.type == null ? false : this.type.isVegan();
 	}
 
+
+	public Document getAvatar () {
+		return this.type == null ? null : this.type.getAvatar();
+	}
+
+
+	public Recipe getRecipe () {
+		return this.recipe;
+	}
+
+
+	protected void setRecipe (final Recipe recipe) {
+		this.recipe = recipe;
+	}
+
+
+	public IngredientType getType () {
+		return this.type;
+	}
+
+
+	protected void setType (final IngredientType type) {
+		this.type = type;
+	}
 }

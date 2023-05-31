@@ -26,7 +26,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.eclipse.persistence.annotations.CacheIndex;
 import edu.damago.tool.HashCodes;
-import edu.damago.cookbook.persistence.BaseEntity;
 
 
 @Entity
@@ -51,16 +50,13 @@ public class Person extends BaseEntity {
 
 	//email CHAR(128) NOT NULL,
 	//UNIQUE KEY (email)
-	@NotNull
-	@Email
-	@Size(max = 128)
-	@CacheIndex(updateable = false)
+	@NotNull @Email	@Size(max = 128)
+	@CacheIndex(updateable = true)
 	@Column(name = "email", nullable = false, updatable = true, unique = true, length = 128)
 	private String email;
 
 	//passwordHash CHAR(64) NOT NULL,
-	@NotNull
-	@Size(max = 64)
+	@NotNull @Size(min = 64, max = 64)
 	@Column(name = "passwordHash", nullable = false, updatable = true, length = 64)
 	private String passwordHash;
 
@@ -78,25 +74,24 @@ public class Person extends BaseEntity {
 	})
 	private Name name;
 
+	@NotNull @Valid
 	@Embedded
-	@NotNull
-	@Valid
 	private Address address;
 
 	@NotNull
 	@ElementCollection
 	@CollectionTable(
-		schema = "Cookbook",
+		schema = "cookbook",
 		name = "PhoneAssociation",
-		joinColumns = @JoinColumn(name = "personReference", nullable = false, updatable = true),
+		joinColumns = @JoinColumn(name = "personReference", nullable = false, updatable = false, insertable = true),
 		uniqueConstraints = @UniqueConstraint(columnNames = { "personReference", "phone" })
 	)
 	@Column(name = "phone", nullable = false, updatable = false, insertable = true, length = 16)
-	protected HashSet<String> phones;
+	protected Set<String> phones;
 
+	//@Column(name = "recipes", nullable = true, updatable = false, length = 16)
 	@NotNull
-	//@Column(name = "recipes", nullable = false, updatable = false, length = 16)
-	@OneToMany(mappedBy = "owner", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE })
+	@OneToMany(mappedBy = "owner", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	private Set<Recipe> recipes;
 
 
@@ -156,7 +151,7 @@ public class Person extends BaseEntity {
 	}
 
 
-	public void setName (Name name) {
+	protected void setName (Name name) {
 		this.name = name;
 	}
 
@@ -166,17 +161,17 @@ public class Person extends BaseEntity {
 	}
 
 
-	public void setAddress (Address address) {
+	protected void setAddress (Address address) {
 		this.address = address;
 	}
 
 
-	public HashSet<String> getPhones () {
+	public Set<String> getPhones () {
 		return phones;
 	}
 
 
-	public void setPhones (HashSet<String> phones) {
+	protected void setPhones (Set<String> phones) {
 		this.phones = phones;
 	}
 
@@ -186,8 +181,7 @@ public class Person extends BaseEntity {
 	}
 
 
-	public void setIngredient (Set<Recipe> recipes) {
+	protected void setRecipes (Set<Recipe> recipes) {
 		this.recipes = recipes;
 	}
-
 }

@@ -19,7 +19,7 @@ UPDATE Document SET hash = SHA2(content,256) WHERE documentIdentity = @d01;
 
 INSERT INTO BaseEntity VALUES (0, "Person", 1, UNIX_TIMESTAMP()*1000, UNIX_TIMESTAMP()*1000);
 SET @p01 = LAST_INSERT_ID();
-INSERT INTO Person VALUES (@p01, @d01, "guest@cookbook.de", SHA2("guest",256), "USER", NULL, "Guest", NULL, NULL, NULL, NULL, "Deutschland");
+INSERT INTO Person VALUES (@p01, @d01, "guest@cookbook.de", SHA2("guest",256), "USER", NULL, "Guest", "Any", "10557", "Spreeweg 1", "Berlin", "Deutschland");
 
 INSERT INTO BaseEntity VALUES (0, "Person", 1, UNIX_TIMESTAMP()*1000, UNIX_TIMESTAMP()*1000);
 SET @p02 = LAST_INSERT_ID();
