@@ -39,7 +39,7 @@ public class Person extends BaseEntity {
 	}
 
 
-	static private final String DEFAULT_PASSWORD = "changeit";
+	static private final String DEFAULT_PASSWORD = "changeit!";
 	static private final String DEFAULT_PASSWORD_HASH = HashCodes.sha2HashText(256, DEFAULT_PASSWORD);
 
 	//avatarReference BIGINT NOT NULL,
@@ -69,6 +69,7 @@ public class Person extends BaseEntity {
 	@NotNull @Valid
 	@Embedded
 	@AttributeOverrides({
+		//changes family to surname
 		@AttributeOverride(name = "family", column = @Column(name = "surname")),
 		@AttributeOverride(name = "given", column = @Column(name = "forename"))
 	})
